@@ -12,6 +12,11 @@ builder.Services.AddDbContext<AuctionDbContext>(opt =>
     });
 builder.Services.AddOpenApi();
 
+builder.Services.AddAutoMapper(cfg =>
+{
+    cfg.AddMaps(AppDomain.CurrentDomain.GetAssemblies());
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
