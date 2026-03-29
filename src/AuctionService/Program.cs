@@ -38,5 +38,7 @@ catch (Exception e)
     Console.WriteLine(e);
 }
 
+Console.WriteLine($"Starting AuctionService... {DateTime.UtcNow.AddDays(10)}");
+
 app.Run();
 
