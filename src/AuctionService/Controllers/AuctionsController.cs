@@ -31,9 +31,6 @@ public class AuctionsController : ControllerBase
         {
             query = query.Where(x => x.UpdatedAt.CompareTo(DateTime.Parse(date).ToUniversalTime()) > 0);
         }
-        // var auctions = await _context.Auctions.Include(x => x.Item).OrderBy(x => x.Item.Make).ToListAsync();
-        
-        // return _mapper.Map<List<AuctionDTO>>(auctions);
 
         return await query.ProjectTo<AuctionDTO>(_mapper.ConfigurationProvider).ToListAsync();
     }
