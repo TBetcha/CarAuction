@@ -23,7 +23,6 @@ public class AuctionsController : ControllerBase
         _context = context;
         _mapper = mapper;
         _publishEndpoint = publishEndpoint;
-
     }
 
     [HttpGet]
@@ -47,7 +46,6 @@ public class AuctionsController : ControllerBase
         if (auction == null) return NotFound();
 
         return _mapper.Map<AuctionDTO>(auction);
-
     }
 
     [HttpPost]
@@ -61,17 +59,15 @@ public class AuctionsController : ControllerBase
 
         _context.Auctions.Add(auction);
 
-        var result = await _context.SaveChangesAsync() > 0;
-
         var newAuction = _mapper.Map<AuctionDTO>(auction);
 
         await _publishEndpoint.Publish(_mapper.Map<AuctionCreated>(newAuction));
 
+        var result = await _context.SaveChangesAsync() > 0;
+
         if (!result) return BadRequest("Could not save changes to database");
 
-
         return CreatedAtAction(nameof(GetAuctionById), new { auction.Id }, newAuction);
-
     }
 
     [HttpPut("{id}")]
@@ -94,8 +90,6 @@ public class AuctionsController : ControllerBase
         if (result) return Ok();
 
         return BadRequest("Problem saving changes...");
-
-
     }
 
     [HttpDelete("{id}")]
@@ -111,6 +105,4 @@ public class AuctionsController : ControllerBase
         if (!result) return BadRequest("Could not update");
         return Ok();
     }
-
-
 }
