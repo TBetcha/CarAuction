@@ -18,6 +18,12 @@ services:
     volumes:
       - /data/db
       # - mongodata:/data/db
+  rabbitmq:
+    image:  rabbitmq:4.0.9-management-alpine
+    ports:
+      - 5672:5672
+      - 15672:15672
+
 volumes:
   pgdata:
   mongodata:
