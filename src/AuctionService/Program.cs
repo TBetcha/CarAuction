@@ -14,6 +14,9 @@ builder.Services.AddAutoMapper(cfg =>
 {
     cfg.AddMaps(AppDomain.CurrentDomain.GetAssemblies());
 });
+
+
+// TODO: Check this - is it causing issue w redis?
 builder.Services.AddMassTransit(x =>
     {
         x.AddEntityFrameworkOutbox<AuctionDbContext>(o =>
